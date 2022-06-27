@@ -1,8 +1,15 @@
 //REAL TIME DATE
 let now = new Date();
 let h2 = document.querySelector("h2");
-let hours = now.getHours();
-let minutes = now.getMinutes();
+let hours = date.getHours();
+if (hours < 10) {
+  hours = `0${hours}`;
+}
+let minutes = date.getMinutes();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
+
 let days = [
   "Sunday",
   "Monday",
