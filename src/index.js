@@ -50,15 +50,18 @@ function enterCity(event) {
   let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
   let city = cityInput.value;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(showTemperature);
-
-  function showTemperature(response) {
-    let realtemp = document.querySelector("#temperature");
-    let temperature = Math.round(response.data.main.temp);
-    let message = `${temperature}°`;
-    realtemp.innerHTML = message;
-  }
+}
+function showTemperature(response) {
+  let realtemp = document.querySelector("#temperature");
+  let temperature = Math.round(response.data.main.temp);
+  realtemp.innerHTML = `${temperature}°`;
+}
+function showHumidity(response) {
+  let showHum = document.querySelector("#humidity");
+  let hum = response.data.main.humidity;
+  console.log(response.data.main.humidity);
+  showHum.innerHTML = `${hum}`;
 }
 
 let searchForm = document.querySelector("#search-form");
