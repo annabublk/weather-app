@@ -31,6 +31,12 @@ function citySearch(city) {
   axios.get(apiUrl).then(weatherCondition);
 }
 
+function weatherSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-text").value;
+  citySearch(city);
+}
+
 function searchLocation(position) {
   let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
@@ -58,3 +64,11 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", convertToCelsius);
+
+let searchForm = document.querySelector("#sesrch-form");
+searchForm.addEventListener("submit", weatherSubmit);
+
+let currentLocButton = document.querySelector("#cur-button");
+currentLocButton.addEventListener("click", navigateLocation);
+
+citySearch("Kyiv");
