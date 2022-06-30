@@ -17,6 +17,9 @@ h2 {
   text-align: center;
   padding-top: 20px;
 }
+.future-temp {
+  padding-bottom: 50px;
+}
 
 .now {
   width: auto;

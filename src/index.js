@@ -1,7 +1,7 @@
 //REAL TIME DATE
 let now = new Date();
 let h2 = document.querySelector("h2");
-let hours = date.getHours();
+let hours = now.getHours();
 if (hours < 10) {
   hours = `0${hours}`;
 }
@@ -20,6 +20,23 @@ let days = [
 ];
 let day = days[now.getDay()];
 h2.innerHTML = `${day}, ${hours}:${minutes}`;
+
+//CURRENT LOCATION
+function curentLocAndTemp(response) {
+  let h1 = document.querySelector("h1");
+  let h2 = document.querySelector("#temperature");
+  h1.innerHTML = `${response.data.name}`;
+  h2.innerHTML = `${Math.round(response.data.main.temp)}°`;
+}
+function showPos(position) {
+  let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(curentLocAndTemp);
+}
+function getCurPos(event) {
+  event.preventDefault();
+}
+navigator.geolocation.getCurrentPosition(showPos);
 
 //ENTER CITY NAME + SEARCH REAL TIME TEMP
 function enterCity(event) {
@@ -47,24 +64,6 @@ function enterCity(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", enterCity);
 
-//CURRENT LOCATION BUTTON
-function curentLocAndTemp(response) {
-  let h1 = document.querySelector("h1");
-  let h2 = document.querySelector("#temperature");
-  h1.innerHTML = `${response.data.name}`;
-  h2.innerHTML = `${Math.round(response.data.main.temp)}°`;
-}
-
-function showPos(position) {
-  let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let units = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(showTemp);
-}
-navigator.geolocation.getCurrentPosition(showPos);
-
 //CELCIUM OR FARENHEIT
 function convertToFahrenheit(event) {
   event.preventDefault();
@@ -81,5 +80,3 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", convertToCelsius);
-
-enterCity("Kyiv");
