@@ -21,48 +21,10 @@ let days = [
 let day = days[now.getDay()];
 h2.innerHTML = `${day}, ${hours}:${minutes}`;
 
-//ENTER CITY NAME + SEARCH REAL TIME TEMP
-function enterCity(event) {
+function navigateLocation(event) {
   event.preventDefault();
-  let searchElement = document.querySelector("#city");
-  let cityInput = document.querySelector("#search-text");
-  searchElement.innerHTML = cityInput.value;
-
-  function showTemperature(response) {
-    let temperature = Math.round(response.data.main.temp);
-    let city = document.querySelector("#city");
-    city.innerHTML = response.data.name;
-    let message = `${temperature}°`;
-    let realtemp = document.querySelector("#temperature");
-    realtemp.innerHTML = message;
-  }
-  let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
-  let units = "metric";
-  let city = cityInput.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-
-  axios.get(apiUrl).then(showTemperature);
+  navigator.geolocation.getCurrentPosition(searchLocation);
 }
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", enterCity);
-
-//CURRENT LOCATION BUTTON
-function currentLocation(event) {
-  event.preventDefault();
-  function showTemp(response) {
-    let h1 = document.querySelector("h1");
-    let temp = Math.round(response.data.main.temp);
-    h1.innerHTML = `It is currently ${temp}° in ${response.data.name}`;
-  }
-  let curButton = document.querySelector("#cur-button");
-  curButton.addEventListener("submit", showTemp);
-}
-function showPos(position) {
-  let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showTemp);
-}
-navigator.geolocation.getCurrentPosition(showPos);
 
 //CELCIUM OR FARENHEIT
 function convertToFahrenheit(event) {
