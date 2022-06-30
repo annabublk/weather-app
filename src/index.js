@@ -1,8 +1,14 @@
 //REAL TIME DATE
 let now = new Date();
 let h2 = document.querySelector("h2");
-let hours = now.getHours();
+let hours = date.getHours();
+if (hours < 10) {
+  hours = `0${hours}`;
+}
 let minutes = now.getMinutes();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
 let days = [
   "Sunday",
   "Monday",
@@ -48,8 +54,6 @@ function curentLocAndTemp(response) {
   h1.innerHTML = `${response.data.name}`;
   h2.innerHTML = `${Math.round(response.data.main.temp)}°`;
 }
-let curButton = document.querySelector("#cur-button");
-curButton.addEventListener("submit", curentLocAndTemp);
 
 function showPos(position) {
   let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
