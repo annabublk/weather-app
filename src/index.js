@@ -21,6 +21,10 @@ let days = [
 let day = days[now.getDay()];
 h2.innerHTML = `${day}, ${hours}:${minutes}`;
 
+function showTemperature(response) {
+  document.querySelector("h1").innerHTML = response.data.name;
+}
+
 function searchLocation(position) {
   let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
