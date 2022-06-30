@@ -56,12 +56,14 @@ function showTemperature(response) {
   let realtemp = document.querySelector("#temperature");
   let temperature = Math.round(response.data.main.temp);
   realtemp.innerHTML = `${temperature}°`;
-}
-function showHumidity(response) {
-  let showHum = document.querySelector("#humidity");
+
+  let realhum = document.querySelector("#humidity");
   let hum = response.data.main.humidity;
-  console.log(response.data.main.humidity);
-  showHum.innerHTML = `${hum}`;
+  realhum.innerHTML = `humidity ${hum}%`;
+
+  let feelslike = document.querySelector("#feels-like");
+  let feel = Math.round(response.data.main.feels_like);
+  feelslike.innerHTML = `feels like ${feel}°`;
 }
 
 let searchForm = document.querySelector("#search-form");
