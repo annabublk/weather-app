@@ -1,4 +1,4 @@
-//REAL TIME DATE
+//REAL TIME + DAY
 let now = new Date();
 let h2 = document.querySelector("h2");
 let hours = now.getHours();
@@ -38,27 +38,27 @@ function getCurPos(event) {
 }
 navigator.geolocation.getCurrentPosition(showPos);
 
-//ENTER CITY NAME + SEARCH REAL TIME TEMP
+let curLocAndTempButton = document.querySelector("#cur-button");
+curLocAndTempButton.addEventListener("submit", getCurPos);
+
+//ENTER CITY NAME + SHOWING TEMP / HUM / UV index
 function enterCity(event) {
   event.preventDefault();
   let searchElement = document.querySelector("#city");
   let cityInput = document.querySelector("#search-text");
   searchElement.innerHTML = cityInput.value;
-
-  function showTemperature(response) {
-    let temperature = Math.round(response.data.main.temp);
-    let city = document.querySelector("#city");
-    city.innerHTML = response.data.name;
-    let message = `${temperature}°`;
-    let realtemp = document.querySelector("#temperature");
-    realtemp.innerHTML = message;
-  }
   let apiKey = "f996a06dc2ceee1ee9c5480eaa578d50";
-  let units = "metric";
   let city = cityInput.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(showTemperature);
+
+  function showTemperature(response) {
+    let realtemp = document.querySelector("#temperature");
+    let temperature = Math.round(response.data.main.temp);
+    let message = `${temperature}°`;
+    realtemp.innerHTML = message;
+  }
 }
 
 let searchForm = document.querySelector("#search-form");
