@@ -41,7 +41,7 @@ navigator.geolocation.getCurrentPosition(showPos);
 let curLocAndTempButton = document.querySelector("#cur-button");
 curLocAndTempButton.addEventListener("submit", getCurPos);
 
-//ENTER CITY NAME + SHOWING TEMP / HUM / UV index
+//ENTER CITY NAME + SHOWING TEMP / HUM / REAL FEEL
 function enterCity(event) {
   event.preventDefault();
   let searchElement = document.querySelector("#city");
